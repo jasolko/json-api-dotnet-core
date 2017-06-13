@@ -2,6 +2,7 @@ using System;
 using JsonApiDotNetCore.Builders;
 using JsonApiDotNetCore.Internal;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
 
 namespace JsonApiDotNetCore.Configuration
 {
@@ -12,6 +13,7 @@ namespace JsonApiDotNetCore.Configuration
         public bool IncludeTotalRecordCount { get; set; }
         public bool AllowClientGeneratedIds { get; set; }
         public IContextGraph ContextGraph  { get; set; }
+        public IContractResolver JsonContractResolver  { get; set; }  = new CamelCasePropertyNamesContractResolver();
 
         public void BuildContextGraph<TContext>(Action<IContextGraphBuilder> builder)
         where TContext : DbContext
